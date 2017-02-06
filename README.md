@@ -66,6 +66,20 @@ Calculates the sum off all values in a dictionary
 - Sum of all values in dictionary as a double type
 
 
+
+## infoMolec
+
+Functions that gives useful information of a molecule in a given dicitonary.  
+
+### Input
+- Molecule Name (_string_): Name of the molecule as written in the files or dictionaries
+- Dictionary of dictionaries: Data in a 2-D dictionary form similar to any of the output items from *_dict4all_* function
+
+### Output
+- Dictionary of information:
+
+
+
 ## helpInfoMolec
 
 Prints on screen interactive help for function _infoMolec_
@@ -75,13 +89,4 @@ Prints on screen interactive help for function _infoMolec_
 
 ### Output
 - NONE
-
-
-
-## infoMolec
-
-
-### Input
-
-### Output
 

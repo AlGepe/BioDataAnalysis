@@ -200,11 +200,13 @@ def getMatches(everyCompDict) :
 ############################################
 
 def dictCutOff(thisDict, maxVal, minVal) :#
+    import copy
+    from copy import deepcopy
     
     dictTrim = copy.deepcopy(thisDict)
     
     if maxVal < minVal :
-        temp = copy.deepcopy(maxVal)
+        temp = dcopy(maxVal)
         maxVal = minVal
         minVal = temp
     elif maxVal == minVal :
@@ -320,8 +322,6 @@ def helpInfoMolec():
 
 
 
-# In[35]:
-
 ############################################
 #        Info-Getter for molecules         #
 ############################################
@@ -429,3 +429,42 @@ def infoMolec(molecule = 0, dictioData = 0):
     if any([molecule == 0, dictioData == 0]):
         helpInfoMolec()
         return
+
+
+
+
+
+############################################
+#        Matching Molecules + 2xCut        #
+############################################
+#
+#  *INPUT: -Dictionary of all data
+#          -List of human cuts[max,min]
+#          -List of bacteria cuts[max,min]
+#
+#  *OUTPUT: Dictionary of molecules 
+#           fulfilling criteriainfo
+#
+#
+############################################
+#        Info-Getter for molecules         #
+############################################
+
+def matchAndCut(allData, cutHuman, cutBacteria):
+
+    theOutput = {}
+    tempDict = {}
+    allData['humans'] = dictCutOff(allData['humans'], cutHuman[0], cutHuman[1])
+
+    tempDict = getMatches(allData)
+    tempDict = dictCutOff(tempDict, cutBacteria[0], cutBacteria[1])
+
+    print "{0:20}: {1:5} {2:5}".format("Molecule", 'Humans', 'Bacterias')
+
+    for molecule in tempDict :
+        theOutput[molecule] = [allData['humans'][molecule], tempDict[molecule]]
+        print "{0:20}: {1:5} {2:5}".format(molecule, allData['humans'][molecule], tempDict[molecule])
+
+    return theOutput
+
+
