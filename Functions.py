@@ -451,12 +451,16 @@ def infoMolec(molecule = 0, dictioData = 0):
 ############################################
 
 def matchAndCut(allData, cutHuman, cutBacteria):
+    import copy
+    from copy import deepcopy
 
     theOutput = {}
     tempDict = {}
-    allData['humans'] = dictCutOff(allData['humans'], cutHuman[0], cutHuman[1])
+    tempAllDict = {}
+    tempAllDict = copy.deepcopy(allData)
+    tempAllDict['humans'] = dictCutOff(allData['humans'], cutHuman[0], cutHuman[1])
 
-    tempDict = getMatches(allData)
+    tempDict = getMatches(tempAllDict)
     tempDict = dictCutOff(tempDict, cutBacteria[0], cutBacteria[1])
 
     print "{0:20}: {1:5} {2:5}".format("Molecule", 'Humans', 'Bacterias')
