@@ -1,6 +1,6 @@
 # BioDataAnalysis - All Functions
 
-## file2dict
+## **file2dict**
 
 Function that looks for compounds (reactants and products) in a \*.xml file with a given format and returns lists (python dictionaries) containing name and number of appearances in chemicals reactions within the file. The function separates products and reactants
 
