@@ -77,6 +77,10 @@ Functions that gives useful information of a molecule in a given dicitonary.
 
 ### Output
 - Dictionary of information:
+	- Keyword: _allBacteria_ || Value: List of bacteria names in which the molecule appears.
+	- Keyword: _humans_ || Value : [number of appearances of the molecule in humans, % of the total number of reactions in humans]
+	- Keyword: _appearancesBacteria_ || Value : Number of total appearances in all Bacterias
+	- Keyword: _bacterias_ || Value : dictionary {name of bacteria : [number of appareances of molecule in bacteria, % of total appareances of the molecule in all bacterias]}
 
 
 
@@ -89,4 +93,19 @@ Prints on screen interactive help for function _infoMolec_
 
 ### Output
 - NONE
+
+
+
+## matchAndCut
+
+Function takes a dictionary of all reactants/products in bateria+human and returns a dictionary with the matching molecules that appear in humans and baterias at the same time and also meet the criteria given by the intervals provided by the user. The intervals specify the allowed number of appearances in human reactions and the number of bacterias in which they also appear.
+
+### Input
+- Dictionary of dictionaries: Data in a 2-D dictionary form similar to any of the output items from *_dict4all_* function
+- Interval limits for number appearances in human reactions: list = [maxValue, minValue]
+- Interval limits for number of bacterias in which the molecule appears: list = [maxValue, minValue]
+
+### Output
+- Dictionary of molecules present in humans and bacteria at the same time and matching the given criteria.  It is presented in the form of {molecule : [# appearances in humans, # bacterias in which it is present]}
+
 
