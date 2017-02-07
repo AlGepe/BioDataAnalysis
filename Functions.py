@@ -1,17 +1,3 @@
-
-# coding: utf-8
-
-# In[8]:
-
-def allImports():
-    from collections import Counter
-    from os import listdir
-    from copy import deepcopy as dcopy
-    print 'All Packages Imported'
-
-
-# In[9]:
-
 #############################################
 #       Read File and get dictionary        #
 #############################################
@@ -30,7 +16,7 @@ def allImports():
 def file2dict(nameString) :
 
     from collections import Counter
-    
+
     thaFile = open(nameString, 'rU')
     log = open("log.out",'w')
     allLines = thaFile.readlines()
@@ -43,53 +29,53 @@ def file2dict(nameString) :
     compound = ""
     products = []
     i = 0
-    
+
     for line in allLines: # Read all file
 
         if not prodOrReact : # line is not part of list of prods/react
-            
+
             if line.find('<listOfProducts>') > 0:
-                
+
                 prodOrReact = True
                 log.write("in")
                 isProd = True
-                
+
             if line.find('<listOfReactants>') > 0:
-                
+
                 prodOrReact = True
                 log.write("in")
                 isReact = True
 
         # Look for Compounds if its time for that
         if prodOrReact : # inside list of prod/react
-            
+
             # Check is list has ended here
             if line.find('</listOfReactants>') > 0:
-                
+
                 prodOrReact = False
                 log.write("out"+'\n')
                 isReact = False
-                
+
             elif line.find('</listOfProducts>') > 0:
-                
+
                 prodOrReact = False
                 log.write("out"+'\n')
                 isProd = False
-                
+
             else : # we are in list
-                
+
                 isGood = line.find('speciesReference species=')
-                
+
                 if isGood > -1:
-                    
+
                     endProd = line.find('"',isGood+27)
                     compound = line[isGood+26:endProd]
-                    
+
                     if isReact :
                         reactants.append(compound)#Add to reactantsList
                     elif isProd :
                         products.append(compound)#Add to products:ist               
-    
+
     # Convert list into dictionary of occurences
     dictReactants = Counter(reactants)
     dictProducts = Counter(products)
@@ -97,8 +83,6 @@ def file2dict(nameString) :
     thaFile.close()
     return compounds
 
-
-# In[19]:
 
 ############################################
 #   Get all Dictionaries from Filenames    #
@@ -119,25 +103,22 @@ def file2dict(nameString) :
 ############################################
 
 def dict4all(allFiles) :
-    
+
     allProds = {}
     allReact = {}
     allInDict = []
-    
+
     for currentFile in allFiles :
-        
+
         absPath = 'ExampleFiles/'+currentFile
         simpDict = file2dict(absPath)
         allReact[currentFile[:-4]] = simpDict[0]
         allProds[currentFile[:-4]] = simpDict[1]
-        
-        
+
     allInDict.append(allReact)
     allInDict.append(allProds)
     return allInDict
 
-
-# In[20]:
 
 ############################################
 #       Get Matches Human-Bateria          #
@@ -159,23 +140,21 @@ def dict4all(allFiles) :
 ############################################
 
 def getMatches(everyCompDict) :
-    
+
     from collections import Counter
     matches = []
     humans = everyCompDict['humans']
     del everyCompDict['humans']
-    
+
     for compound in humans :
-        for bacteria in everyCompDict : 
+        for bacteria in everyCompDict :
             if compound in everyCompDict[bacteria] : # Compounds appears in bacteria and humans
                 matches.append(compound)
-                
+
     everyCompDict['humans'] = humans
     dictMatches = Counter(matches)
     return dictMatches
 
-
-# In[21]:
 
 ############################################
 #       Apply cuts on Dictionaries         #
@@ -199,12 +178,12 @@ def getMatches(everyCompDict) :
 #       Apply cuts on Dictionaries         #
 ############################################
 
-def dictCutOff(thisDict, maxVal, minVal) :#
+def dictCutOff(thisDict, maxVal, minVal) :
     import copy
     from copy import deepcopy
-    
+
     dictTrim = copy.deepcopy(thisDict)
-    
+
     if maxVal < minVal :
         temp = dcopy(maxVal)
         maxVal = minVal
@@ -212,14 +191,12 @@ def dictCutOff(thisDict, maxVal, minVal) :#
     elif maxVal == minVal :
         print "Error: Invalid input limits [They are the same you moron]"
         return
-    for compound in thisDict : 
+    for compound in thisDict :
         if any ([dictTrim[compound] >= maxVal, dictTrim[compound] <= minVal]) :
             del dictTrim[compound]
-    
+
     return dictTrim
 
-
-# In[22]:
 
 ############################################
 #        Sum All Dictionary Entries        #
@@ -235,14 +212,12 @@ def dictCutOff(thisDict, maxVal, minVal) :#
 ############################################
 
 def sumDict(dict2Sum) :
-    
+
     total = 0
     for molec in dict2Sum:
         total += dict2Sum[molec]
     return total*1.0
 
-
-# In[32]:
 
 ############################################
 #        Help-printing for infoMolec       #
@@ -263,8 +238,9 @@ def sumDict(dict2Sum) :
 ############################################
 #        Help-printing for infoMolec       #
 ############################################
+
 def helpInfoMolec():
-    
+
     print "############################################"
     print "#        Info-Getter for molecules         #"
     print "#                                          #"
@@ -319,7 +295,7 @@ def helpInfoMolec():
         else :
             print "Topic could not be selected, please try again:"
             topic = raw_input('Select topic: ')
-
+    return
 
 
 ############################################
@@ -359,11 +335,11 @@ def infoMolec(molecule = 0, dictioData = 0):
         humanStats = []
         bactStats = {}
         tempBactDict = {}
-        allBactStats = {}  
+        allBactStats = {}
         nameLen = 0
 
         '''
-            List of Bacterias 
+        List of Bacterias
         '''
         for bacteria in dictioData :
             if molecule in dictioData[bacteria] :
@@ -374,7 +350,7 @@ def infoMolec(molecule = 0, dictioData = 0):
         manyStats['allBacteria'] = listOfBact
 
         '''
-         Appearances in humans
+        Appearances in humans
         '''
         humanStats.append(dictioData['humans'][molecule])
         sumHumans = sumDict(dictioData['humans'])
@@ -388,7 +364,7 @@ def infoMolec(molecule = 0, dictioData = 0):
         print "=================================="
 
         '''
-            Total Appearances in all Bacteria
+        Total Appearances in all Bacteria
         '''
 
         for bacteria in listOfBact :
@@ -400,7 +376,7 @@ def infoMolec(molecule = 0, dictioData = 0):
         manyStats['appearancesBacteria'] = totalAppear
 
         '''
-            Appearances in bacterias 
+        Appearances in bacterias
         '''
 
         for bacteria in tempBactDict :
@@ -419,19 +395,16 @@ def infoMolec(molecule = 0, dictioData = 0):
 
 
         '''
-            Work done, lay back and enjoy results
+        Work done, lay back and enjoy results
         '''
         return manyStats
-    
+
     '''
-        On-screen help / manual
+    On-screen help / manual
     '''
     if any([molecule == 0, dictioData == 0]):
         helpInfoMolec()
         return
-
-
-
 
 
 ############################################
