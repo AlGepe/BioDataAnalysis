@@ -1,5 +1,7 @@
 # BioDataAnalysis - All Functions
 
+Simple analysis software for BioInformatics project that takes \*.xml files containing information about the reactions inside given bacteria and is able to provide the user with comprehensible information about the reactants and products in bacteria and humans.
+
 ## **file2dict**
 
 Function that looks for compounds (reactants and products) in a \*.xml file with a given format and returns lists (python dictionaries) containing name and number of appearances in chemicals reactions within the file. The function separates products and reactants
@@ -15,7 +17,7 @@ Function that looks for compounds (reactants and products) in a \*.xml file with
 
 ## dict4all
 
-This function takes a list of strings (names of files) as input and returns a list of two (reactants and products) dictionaries of dictionaries. Each dictionary in the list has as key the name of the bacteria to which the file refers (which is the name of the file minus the extension) and as value a dictionary of the compounds present and number of occurencies of such compound in the same format as output from _file2string_. This function calls _file2string_ internally after correcting filename to the correct path.
+This function takes a list of strings (names of files) as input and returns a list of two (reactants and products) dictionaries of dictionaries. Each dictionary in the list has as key the name of the bacteria to which the file refers (which is the name of the file minus the extension) and as value a dictionary of the compounds present and number of ocurrencies of such compound in the same format as output from _file1string_. This function calls _file2string_ internally after correcting filename to the correct path.
 
 ### Input
 - list of filenames (as _string)_: Name of the file from which to take the molecules present in reactions.
@@ -108,4 +110,6 @@ Function takes a dictionary of all reactants/products in bateria+human and retur
 ### Output
 - Dictionary of molecules present in humans and bacteria at the same time and matching the given criteria.  It is presented in the form of {molecule : [# appearances in humans, # bacterias in which it is present]}
 
+## REQUIRED FILES
 
+All the required files are contained in the archive "ExampleFiles.zip". It should be unzipped and all the files in it should be placed in a folder named: ExampleFiles (Otherwise modification to the source code must be done for the program to run correctly)
