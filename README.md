@@ -17,7 +17,7 @@ Function that looks for compounds (reactants and products) in a \*.xml file with
 
 ## dict4all
 
-This function takes a list of strings (names of files) as input and returns a list of two (reactants and products) dictionaries of dictionaries. Each dictionary in the list has as key the name of the bacteria to which the file refers (which is the name of the file minus the extension) and as value a dictionary of the compounds present and number of ocurrencies of such compound in the same format as output from _file1string_. This function calls _file2string_ internally after correcting filename to the correct path.
+This function takes a list of strings (names of files) as input and returns a list of two (reactants and products) dictionaries of dictionaries. Each dictionary in the list has as key the name of the bacteria to which the file refers (which is the name of the file minus the extension) and as value a dictionary of the compounds present and number of occurrences of such compound in the same format as output from _file1string_. This function calls _file2string_ internally after correcting filename to the correct path.
 
 ### Input
 - list of filenames (as _string)_: Name of the file from which to take the molecules present in reactions.
@@ -71,7 +71,7 @@ Calculates the sum off all values in a dictionary
 
 ## infoMolec
 
-Functions that gives useful information of a molecule in a given dicitonary.  
+Functions that gives useful information of a molecule in a given dictionary.  
 
 ### Input
 - Molecule Name (_string_): Name of the molecule as written in the files or dictionaries
@@ -81,8 +81,8 @@ Functions that gives useful information of a molecule in a given dicitonary.
 - Dictionary of information:
 	- Keyword: _allBacteria_ || Value: List of bacteria names in which the molecule appears.
 	- Keyword: _humans_ || Value : [number of appearances of the molecule in humans, % of the total number of reactions in humans]
-	- Keyword: _appearancesBacteria_ || Value : Number of total appearances in all Bacterias
-	- Keyword: _bacterias_ || Value : dictionary {name of bacteria : [number of appareances of molecule in bacteria, % of total appareances of the molecule in all bacterias]}
+	- Keyword: _appearancesBacteria_ || Value : Number of total appearances in all Bacteria
+	- Keyword: _bacterias_ || Value : dictionary {name of bacteria : [number of appearances of molecule in bacteria, % of total appearances of the molecule in all bacteria]}
 
 
 
